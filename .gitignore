@@ -1,0 +1,64 @@
+# ============================================================================
+# STRICT SECURITY: NEVER COMMIT PROPRIETARY BACKEND, ADMIN OR DATABASE FILES
+# BẢO MẬT NGHIÊM NGẶT: CHẶN TUYỆT ĐỐI MÃ NGUỒN GỐC BACKEND, ADMIN VÀ DATABASE
+# ============================================================================
+backend/
+server/
+core/
+internal/
+private/
+admin_ex.php
+*admin*.php
+main.go
+exchange_server
+*.exe
+*.bin
+*.out
+
+# Database dumps & schemas
+*.sql
+*.sql.gz
+*.dump
+*.db
+*.sqlite
+*.sqlite3
+
+# Environment variables, secrets & certificates
+.env
+.env.*
+*.env
+!.env.example
+*.pem
+*.key
+*.crt
+*.p12
+secrets.*
+config.local.*
+
+# Archives & backups
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+*.bak
+*.swp
+*~
+
+# Language & IDE artifacts
+node_modules/
+vendor/
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+dist/
+build/
+*.egg-info/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

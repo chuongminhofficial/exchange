@@ -1,0 +1,27 @@
+{
+  "name": "@exchange-saas/sdk",
+  "version": "4.0.0",
+  "description": "Official JavaScript/TypeScript SDK for Exchange SaaS & SUE Real-Time Financial Rates API (150+ Fiat, 310+ Crypto, Forex, Gold/Commodities, Global Indices)",
+  "main": "exchange_sdk.js",
+  "types": "exchange_sdk.d.ts",
+  "files": [
+    "exchange_sdk.js",
+    "exchange_sdk.d.ts",
+    "README.md"
+  ],
+  "keywords": [
+    "exchange-rate",
+    "forex",
+    "crypto",
+    "fiat",
+    "xauusd",
+    "gold-price",
+    "ohlcv",
+    "economic-calendar",
+    "exchange-saas"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,26 @@
+name: SDK Syntax & Schema Validation
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  validate-sdks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate JavaScript SDK Syntax
+        run: node --check sdk/js/exchange_sdk.js && node --check examples/js_quickstart.js
+
+      - name: Validate Python SDK Syntax
+        run: python3 -m py_compile sdk/python/exchange_sdk.py examples/python_quickstart.py
+
+      - name: Validate PHP SDK Syntax
+        run: php -l sdk/php/ExchangeSDK.php && php -l examples/php_quickstart.php
+
+      - name: Validate Postman JSON Schemas
+        run: |
+          python3 -c "import json; json.load(open('postman/exchange_postman_collection.en.json')); json.load(open('postman/exchange_postman_collection.vi.json'))"

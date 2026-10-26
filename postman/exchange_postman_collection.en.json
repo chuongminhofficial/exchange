@@ -1,0 +1,1244 @@
+{
+  "info": {
+    "_postman_id": "exchange-saas-api-v4-2026",
+    "name": "Exchange Rate SaaS API (Official Public Client Collection - EN)",
+    "description": "Official Postman Collection v2.1.0 for integrating the Exchange SaaS & SUE Real-Time API: 150+ ISO-4217 Fiat Currencies, 310+ Cryptocurrencies, Forex Pairs, Commodities (Spot Gold XAUUSD, Silver, Crude Oil), and Global Stock Indices.\n\n- **Base Gateway URL**: `https://api.l.lc/exchange`\n- **Authentication**: Pass Header `X-API-Key: {{api_key}}` or Query Parameter `?api_key={{api_key}}`\n- **Response Architecture**: In-Memory Pre-rendered `[]byte` JSON (Sub-millisecond latency)\n- **Localization**: Supports `?lang=en` (default) and `?lang=vi` (Vietnamese)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://api.l.lc/exchange",
+      "type": "string",
+      "description": "Base Gateway URL for Exchange SaaS API"
+    },
+    {
+      "key": "api_key",
+      "value": "sk_live_your_api_key_here",
+      "type": "string",
+      "description": "Your Customer SaaS API Key (e.g. sk_live_...)"
+    }
+  ],
+  "item": [
+    {
+      "name": "01. In-Memory Pre-Rendered Rates (Zero-CPU Sub-Millisecond)",
+      "description": "Endpoints served directly from pre-rendered `[]byte` RAM buffers with microsecond response latency.",
+      "item": [
+        {
+          "name": "1.1. Get All 500+ Rates Snapshot (/api/v1/rates)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/rates",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "rates"
+              ],
+              "query": []
+            },
+            "description": "Trả về toàn bộ hơn 500+ mã Ngoại tệ (Fiat), Tiền điện tử (Crypto), Cặp ngoại hối (Forex), Hàng hóa (Vàng/Bạc/Dầu) và Chỉ số chứng khoán từ bộ đệm RAM."
+          },
+          "response": []
+        },
+        {
+          "name": "1.2. Single Symbol Rate Lookup (/api/v1/rates?symbol=XAUUSD)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/rates?symbol=XAUUSD",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "rates"
+              ],
+              "query": [
+                {
+                  "key": "symbol",
+                  "value": "XAUUSD",
+                  "description": "Mã tài sản cần tra cứu (VD: XAUUSD, BTC, VND, EURUSD, SPX500)",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Lấy thông tin giá Bid, Ask, Mid, Spread, High/Low 24h và % thay đổi của 1 mã cụ thể từ bộ đệm Pre-render."
+          },
+          "response": []
+        },
+        {
+          "name": "1.3. Filter Rates by Asset Category (/api/v1/rates?type=commodities)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/rates?type=commodities",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "rates"
+              ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "commodities",
+                  "description": "Nhóm dữ liệu: fiat | crypto | forex | commodities | indices",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Lọc bảng tỷ giá theo danh mục: `fiat`, `crypto`, `forex`, `commodities`, hoặc `indices`."
+          },
+          "response": []
+        },
+        {
+          "name": "1.4. 150+ ISO-4217 Fiat Currencies (/api/v1/rates/fiat)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/rates/fiat",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "rates",
+                "fiat"
+              ],
+              "query": []
+            },
+            "description": "Chỉ lấy danh sách 150+ đồng tiền pháp định quốc tế (VND, EUR, JPY, GBP, AUD, CAD, SGD, THB, KRW...)."
+          },
+          "response": []
+        },
+        {
+          "name": "1.5. 310+ Cryptocurrencies (/api/v1/rates/crypto)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/rates/crypto",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "rates",
+                "crypto"
+              ],
+              "query": []
+            },
+            "description": "Chỉ lấy danh sách 310+ đồng tiền điện tử (BTC, ETH, SOL, BNB, XRP, USDT, DOGE, TON...)."
+          },
+          "response": []
+        },
+        {
+          "name": "1.6. Major & Cross Forex Pairs (/api/v1/rates/forex)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/rates/forex",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "rates",
+                "forex"
+              ],
+              "query": []
+            },
+            "description": "Chỉ lấy các cặp tỷ giá ngoại hối chính và chéo (EURUSD, GBPUSD, USDJPY, USDVND, EURVND, AUDUSD...)."
+          },
+          "response": []
+        },
+        {
+          "name": "1.7. Spot Gold, Silver & Commodities (/api/v1/rates/commodities)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/rates/commodities",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "rates",
+                "commodities"
+              ],
+              "query": []
+            },
+            "description": "Chỉ lấy nhóm Kim loại quý và Năng lượng (Vàng giao ngay XAUUSD, Bạc XAGUSD, Bạch kim XPTUSD, Dầu WTIUSD, Dầu BRENTUSD...)."
+          },
+          "response": []
+        },
+        {
+          "name": "1.8. Global Stock Indices (/api/v1/rates/indices)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/rates/indices",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "rates",
+                "indices"
+              ],
+              "query": []
+            },
+            "description": "Chỉ lấy các chỉ số thị trường chứng khoán lớn (SPX500, NAS100, US30, DXY, GER40, UK100, JPN225, VNINDEX...)."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "02. Market Breadth, Search & Historical OHLCV Candlesticks",
+      "description": "Batch real-time quotes, symbol lookup, top gainers/losers/most-active rankings, OHLCV bars, and tick history.",
+      "item": [
+        {
+          "name": "2.1. Batch Real-Time Quotes (/api/v1/latest)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/latest?symbols=EURUSD,XAUUSD,BTC,ETH,VND",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "latest"
+              ],
+              "query": [
+                {
+                  "key": "symbols",
+                  "value": "EURUSD,XAUUSD,BTC,ETH,VND",
+                  "description": "Danh sách mã phân tách bằng dấu phẩy",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Truyền danh sách các mã phân cách bằng dấu phẩy để lấy giá Bid/Ask/Mid thời gian thực trong 1 lần gọi."
+          },
+          "response": []
+        },
+        {
+          "name": "2.2. Active Streaming Symbols (/api/v1/active)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/active",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "active"
+              ],
+              "query": []
+            },
+            "description": "Trả về danh sách toàn bộ các mã đang có luồng giá trực tuyến từ Exchange Realtime Hub."
+          },
+          "response": []
+        },
+        {
+          "name": "2.3. Search & Filter Symbols (/api/v1/symbols/search)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/symbols/search?q=USD&limit=30",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "symbols",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "USD",
+                  "description": "Từ khóa tìm kiếm (theo Symbol hoặc Tên)",
+                  "disabled": false
+                },
+                {
+                  "key": "type",
+                  "value": "",
+                  "description": "Tùy chọn lọc: fiat, crypto, forex, commodities, indices",
+                  "disabled": true
+                },
+                {
+                  "key": "limit",
+                  "value": "30",
+                  "description": "Số kết quả tối đa (1 - 200)",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Tìm kiếm mã theo từ khóa tên hoặc ký hiệu, hỗ trợ lọc theo nhóm tài sản và giới hạn số lượng."
+          },
+          "response": []
+        },
+        {
+          "name": "2.4. Top 20 24h Gainers (/api/v1/market/gainers)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/market/gainers",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "market",
+                "gainers"
+              ],
+              "query": []
+            },
+            "description": "Trả về Top 20 tài sản có mức tăng trưởng phần trăm 24h cao nhất."
+          },
+          "response": []
+        },
+        {
+          "name": "2.5. Top 20 24h Losers (/api/v1/market/losers)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/market/losers",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "market",
+                "losers"
+              ],
+              "query": []
+            },
+            "description": "Trả về Top 20 tài sản có mức giảm phần trăm 24h sâu nhất."
+          },
+          "response": []
+        },
+        {
+          "name": "2.6. Top 20 Most Active Assets (/api/v1/market/most-active)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/market/most-active",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "market",
+                "most-active"
+              ],
+              "query": []
+            },
+            "description": "Trả về Top 20 tài sản có khối lượng giao dịch 24h lớn nhất."
+          },
+          "response": []
+        },
+        {
+          "name": "2.7. Market Breadth Summary (/api/v1/market/summary)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/market/summary",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "market",
+                "summary"
+              ],
+              "query": []
+            },
+            "description": "Thống kê tổng số mã đang tăng giá, giảm giá, đứng giá và số lượng mã theo từng phân khúc."
+          },
+          "response": []
+        },
+        {
+          "name": "2.8. Historical OHLCV Candlestick Bars (/api/v1/ohlc)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/ohlc?symbol=XAUUSD&interval=1h&limit=100",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "ohlc"
+              ],
+              "query": [
+                {
+                  "key": "symbol",
+                  "value": "XAUUSD",
+                  "description": "Mã tài sản (VD: EURUSD, XAUUSD, BTCUSD)",
+                  "disabled": false
+                },
+                {
+                  "key": "interval",
+                  "value": "1h",
+                  "description": "Khung thời gian: 1m, 5m, 15m, 30m, 1h, 4h, 1d",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Số lượng cây nến cần lấy",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Lấy dữ liệu biểu đồ nến (Open, High, Low, Close, TickVolume) phục vụ vẽ biểu đồ TradingView / Lightweight Charts."
+          },
+          "response": []
+        },
+        {
+          "name": "2.9. Recent Tick-by-Tick History (/api/v1/tick-history)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/tick-history?symbol=EURUSD&count=50",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "tick-history"
+              ],
+              "query": [
+                {
+                  "key": "symbol",
+                  "value": "EURUSD",
+                  "description": "Mã tài sản cần lấy lịch sử tick",
+                  "disabled": false
+                },
+                {
+                  "key": "count",
+                  "value": "50",
+                  "description": "Số lượng tick gần nhất",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Trả về lịch sử các bước khớp giá (Tick) gần nhất của một mã tài sản."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "03. Macroeconomic Calendar & Financial News Feeds",
+      "description": "Global macroeconomic calendar across 54 countries (CPI, Nonfarm Payrolls, Fed/ECB rates) and real-time market/Fintech news.",
+      "item": [
+        {
+          "name": "3.1. Global Macroeconomic Calendar (/api/v1/calendar)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/calendar?countries=US,EU,GB,JP&importance=high",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "calendar"
+              ],
+              "query": [
+                {
+                  "key": "countries",
+                  "value": "US,EU,GB,JP",
+                  "description": "Mã quốc gia ISO phân cách bằng dấu phẩy",
+                  "disabled": false
+                },
+                {
+                  "key": "importance",
+                  "value": "high",
+                  "description": "Mức độ tác động: high | medium | low",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Lấy lịch sự kiện kinh tế vĩ mô, hỗ trợ lọc theo mã quốc gia và mức độ quan trọng."
+          },
+          "response": []
+        },
+        {
+          "name": "3.2. Upcoming High-Impact Economic Events (/api/v1/calendar/upcoming)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/calendar/upcoming?importance=high&limit=20",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "calendar",
+                "upcoming"
+              ],
+              "query": [
+                {
+                  "key": "importance",
+                  "value": "high",
+                  "description": "Mức độ quan trọng: high | medium | low",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Số sự kiện tối đa",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Lấy danh sách các sự kiện kinh tế vĩ mô sắp công bố trong các giờ tới."
+          },
+          "response": []
+        },
+        {
+          "name": "3.3. Supported Calendar Countries & Currencies (/api/v1/calendar/countries)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/calendar/countries",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "calendar",
+                "countries"
+              ],
+              "query": []
+            },
+            "description": "Trả về danh sách các quốc gia và đồng tiền tương ứng được hỗ trợ trong lịch kinh tế."
+          },
+          "response": []
+        },
+        {
+          "name": "3.4. International Financial Market News (/api/v1/news/market)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/news/market?symbol=XAUUSD&maxResults=10",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "news",
+                "market"
+              ],
+              "query": [
+                {
+                  "key": "symbol",
+                  "value": "XAUUSD",
+                  "description": "Mã tài sản liên quan",
+                  "disabled": false
+                },
+                {
+                  "key": "maxResults",
+                  "value": "10",
+                  "description": "Số lượng bài viết tối đa",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Tin tức nóng hổi về thị trường Ngoại hối, Vàng, Hàng hóa và Tiền điện tử."
+          },
+          "response": []
+        },
+        {
+          "name": "3.5. Fintech, Crypto & Hacker News Feed (/api/v1/news/hn)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/news/hn?q=bitcoin&maxResults=10",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "news",
+                "hn"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "bitcoin",
+                  "description": "Từ khóa chủ đề",
+                  "disabled": false
+                },
+                {
+                  "key": "maxResults",
+                  "value": "10",
+                  "description": "Số lượng tin tối đa",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Tin tức xu hướng công nghệ, Fintech, AI và Crypto từ Hacker News."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "04. SaaS Value-Added Utilities (Converter, Cross Matrix, Portfolio, Ticker)",
+      "description": "Cross-asset currency/crypto/gold converter, multi-currency E-commerce checkout matrix, portfolio valuation, and embeddable ticker widget.",
+      "item": [
+        {
+          "name": "4.1. Cross-Asset Currency & Crypto Converter (/api/v1/convert)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/convert?from=BTC&to=VND&amount=1.5",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "convert"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "BTC",
+                  "description": "Mã tiền tệ/tài sản gốc (VD: USD, BTC, XAUUSD, EUR)",
+                  "disabled": false
+                },
+                {
+                  "key": "to",
+                  "value": "VND",
+                  "description": "Mã tiền tệ/tài sản đích (VD: VND, USD, ETH, JPY)",
+                  "disabled": false
+                },
+                {
+                  "key": "amount",
+                  "value": "1.5",
+                  "description": "Số lượng cần quy đổi",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Quy đổi tức thì bất kỳ số lượng nào giữa 2 đồng tiền bất kỳ (Fiat <-> Fiat, Crypto <-> Fiat, Vàng <-> VND...)."
+          },
+          "response": []
+        },
+        {
+          "name": "4.2. Multi-Currency Cross Rate Matrix (/api/v1/saas/matrix)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/saas/matrix?base=USD&targets=VND,EUR,JPY,GBP,SGD,THB,KRW,BTC,XAUUSD&amount=100",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "saas",
+                "matrix"
+              ],
+              "query": [
+                {
+                  "key": "base",
+                  "value": "USD",
+                  "description": "Đồng tiền cơ sở",
+                  "disabled": false
+                },
+                {
+                  "key": "targets",
+                  "value": "VND,EUR,JPY,GBP,SGD,THB,KRW,BTC,XAUUSD",
+                  "description": "Danh sách các mã đích",
+                  "disabled": false
+                },
+                {
+                  "key": "amount",
+                  "value": "100",
+                  "description": "Số tiền gốc",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Tính toán cùng lúc giá trị quy đổi từ 1 đồng tiền gốc sang hàng chục đồng tiền mục tiêu (Dành cho trang thanh toán E-commerce đa quốc gia)."
+          },
+          "response": []
+        },
+        {
+          "name": "4.3. Real-Time Multi-Asset Portfolio Valuation (/api/v1/saas/portfolio)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/saas/portfolio?holdings=BTC:1.5,ETH:10,XAUUSD:5,EUR:5000&target=USD",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "saas",
+                "portfolio"
+              ],
+              "query": [
+                {
+                  "key": "holdings",
+                  "value": "BTC:1.5,ETH:10,XAUUSD:5,EUR:5000",
+                  "description": "Danh sách tài sản theo cú pháp MÃ:SỐ_LƯỢNG",
+                  "disabled": false
+                },
+                {
+                  "key": "target",
+                  "value": "USD",
+                  "description": "Đồng tiền quy chiếu tổng giá trị (VD: USD, VND, EUR)",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Truyền danh sách tài sản đang nắm giữ (`MÃ:SỐ_LƯỢNG`), hệ thống tự động định giá tổng tài sản và tỷ trọng từng mã theo thời gian thực."
+          },
+          "response": []
+        },
+        {
+          "name": "4.4. Compact JSON for Embeddable Marquee Ticker (/api/v1/saas/embed-ticker)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/saas/embed-ticker?symbols=EURUSD,USDVND,XAUUSD,BTC,ETH,SPX500",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "saas",
+                "embed-ticker"
+              ],
+              "query": [
+                {
+                  "key": "symbols",
+                  "value": "EURUSD,USDVND,XAUUSD,BTC,ETH,SPX500",
+                  "description": "Danh sách mã hiển thị trên thanh Ticker",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Trả về JSON tối giản (`s`, `p`, `b`, `a`, `c`, `d`) cực nhẹ để nhúng thanh chạy tỷ giá (Marquee Ticker) lên đầu trang web."
+          },
+          "response": []
+        },
+        {
+          "name": "4.5. Supported Asset Category Catalog (/api/v1/exchange/catalog)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/exchange/catalog",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "exchange",
+                "catalog"
+              ],
+              "query": []
+            },
+            "description": "Trả về thông tin tổng hợp các nhóm danh mục tài sản và số lượng mã đang hỗ trợ trong bộ nhớ."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "05. Account Status, Real-Time Quota & Gateway Health",
+      "description": "Inspect real-time Minute/Hour/Day/Month quota usage, SUE billing reconciliation preview, and public gateway health.",
+      "item": [
+        {
+          "name": "5.1. Account Status & Real-Time Quota Counters (/api/v1/account/status)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/account/status",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "account",
+                "status"
+              ],
+              "query": []
+            },
+            "description": "Trả về thông tin gói cước hiện tại, bộ đếm sử dụng theo Phút/Giờ/Ngày/Tháng, danh sách Allow/Disable Host, quyền Endpoint và lịch sử gọi gần nhất."
+          },
+          "response": []
+        },
+        {
+          "name": "5.2. SUE Billing Reconciliation Preview (/api/v1/billing/reconcile)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/billing/reconcile",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "billing",
+                "reconcile"
+              ],
+              "query": []
+            },
+            "description": "Xem chi tiết số lượng `sue_request` đã tiêu thụ kể từ kỳ đối soát gần nhất, đơn giá/request và tổng chi phí tạm tính (USD)."
+          },
+          "response": []
+        },
+        {
+          "name": "5.3. Public Gateway Health Check (/health)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}",
+                "type": "text",
+                "description": "Your Exchange SaaS API Key (via X-API-Key header or ?api_key= query param)"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "health"
+              ],
+              "query": []
+            },
+            "description": "Kiểm tra tình trạng hoạt động của cổng Exchange API (Không yêu cầu API Key)."
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

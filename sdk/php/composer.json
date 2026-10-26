@@ -1,0 +1,22 @@
+{
+  "name": "exchange-saas/exchange-sdk-php",
+  "description": "Official PHP SDK for Exchange SaaS & SUE Real-Time Financial Rates API (V4.0) with Persistent cURL Keep-Alive",
+  "type": "library",
+  "license": "MIT",
+  "version": "4.0.0",
+  "require": {
+    "php": ">=7.4",
+    "ext-json": "*"
+  },
+  "suggest": {
+    "ext-curl": "Recommended for Persistent HTTP Keep-Alive connection pooling"
+  },
+  "autoload": {
+    "psr-4": {
+      "ExchangeSaaS\\": ""
+    },
+    "files": [
+      "ExchangeSDK.php"
+    ]
+  }
+}
